@@ -1,0 +1,9 @@
+<span
+    *ngFor="let symbol of symbols; let i = index"
+    [class]="symbol.class"
+    [innerText]="symbol.text || ''"
+    [@symbolStorm]="symbol"
+    (@symbolStorm.done)="onTransitionEnd($event, symbol)"
+>
+</span>
+<!-- <pre>{{ symbols | json }}</pre> -->

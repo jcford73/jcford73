@@ -1,0 +1,14 @@
+<span
+    *ngFor="let symbol of symbols; let i = index"
+    class="outer"
+    [style]="symbol.outerStyle"
+    (transitionend)="onTransitionEnd($event,symbol)"
+>
+    <span
+        class="inner"
+        [class]="symbol.class"
+        [innerText]="symbol.text || ''"
+        [style]="symbol.innerStyle"
+    ></span>
+</span>
+<!-- <pre>{{ symbols | json }}</pre> -->
