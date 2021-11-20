@@ -4,6 +4,7 @@ import { ProfilePageComponent } from './components/profile-page/profile-page.com
 import { ProfileRoutingModule } from './profile-routing.module';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { NavBarComponent } from './components/nav-bar/nav-bar.component';
+import { SymbolStormModule } from '../symbol-storm/symbol-storm.module';
 
 
 
@@ -15,7 +16,8 @@ import { NavBarComponent } from './components/nav-bar/nav-bar.component';
   imports: [
     CommonModule,
     ProfileRoutingModule,
-    FontAwesomeModule
+    FontAwesomeModule,
+    SymbolStormModule
   ]
 })
 export class ProfileModule { }

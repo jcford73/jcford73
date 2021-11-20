@@ -4,6 +4,7 @@
     [innerText]="symbol.text || ''"
     [@symbolStorm]="symbol"
     (@symbolStorm.done)="onTransitionEnd($event, symbol)"
+    aria-hidden="true"
 >
 </span>
 <!-- <pre>{{ symbols | json }}</pre> -->

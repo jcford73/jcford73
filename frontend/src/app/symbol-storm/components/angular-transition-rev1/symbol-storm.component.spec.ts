@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { SymbolStormComponent } from './symbol-storm.component';
+import { SymbolStormNgComponent } from './symbol-storm.component';
 
 describe('SymbolStormComponent', () => {
-  let component: SymbolStormComponent;
-  let fixture: ComponentFixture<SymbolStormComponent>;
+  let component: SymbolStormNgComponent;
+  let fixture: ComponentFixture<SymbolStormNgComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ SymbolStormComponent ]
+      declarations: [ SymbolStormNgComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(SymbolStormComponent);
+    fixture = TestBed.createComponent(SymbolStormNgComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

@@ -8,7 +8,7 @@ import {
     transition,
     trigger,
 } from '@angular/animations';
-import { Component, OnInit } from '@angular/core';
+import { Component, HostBinding, OnInit } from '@angular/core';
 
 interface Symbol {
     text?: string;
@@ -18,7 +18,7 @@ interface Symbol {
 }
 
 @Component({
-    selector: 'app-symbol-storm',
+    selector: 'app-symbol-storm-ng',
     templateUrl: './symbol-storm.component.html',
     styleUrls: ['./symbol-storm.component.scss'],
     animations: [
@@ -66,9 +66,11 @@ interface Symbol {
         ]),
     ],
 })
-export class SymbolStormComponent implements OnInit {
+export class SymbolStormNgComponent implements OnInit {
     symbols!: Symbol[];
     private readonly maxSymbols = 20;
+
+    @HostBinding('attr.aria-hidden') ariaHidden = true;
 
     constructor() {}
 

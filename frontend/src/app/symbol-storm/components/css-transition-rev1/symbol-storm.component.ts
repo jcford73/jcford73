@@ -10,17 +10,16 @@ interface Symbol {
 }
 
 @Component({
-    selector: 'app-symbol-storm',
+    selector: 'app-symbol-storm-css',
     templateUrl: './symbol-storm.component.html',
     styleUrls: ['./symbol-storm.component.scss'],
 })
-export class SymbolStormComponent implements OnInit {
+export class SymbolStormCssComponent implements OnInit {
     symbols!: Symbol[];
     get activeSymbols(): number {
         return this.symbols.filter((s) => s.shown).length;
     }
     private readonly maxSymbols = 10;
-    private lastSymbol = 0;
 
     constructor() {}
 
