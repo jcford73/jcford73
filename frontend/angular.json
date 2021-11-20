@@ -120,7 +120,7 @@
         "deploy": {
           "builder": "angular-cli-ghpages:deploy",
           "options": {
-              "repo":"https://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@github.com/jcford73/jcford73.github.io.git"
+              "repo":"https://github.com/jcford73/jcford73.github.io.git"
           }
         }
       }
