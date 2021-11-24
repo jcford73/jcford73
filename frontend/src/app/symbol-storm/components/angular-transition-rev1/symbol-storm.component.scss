@@ -1,10 +1,14 @@
 :host {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
     span {
         user-select: none;
         display: block;
         position: fixed;
         z-index: -1;
-        opacity: 0;
+        opacity: 1;
         color: #1c1c1c;
         text-shadow: 1px 1px 3px #181818, -1px -1px 5px #181818;
     }

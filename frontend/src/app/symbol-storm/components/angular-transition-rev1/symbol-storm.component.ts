@@ -23,42 +23,26 @@ interface Symbol {
     styleUrls: ['./symbol-storm.component.scss'],
     animations: [
         trigger('symbolStorm', [
-            state(
-                'shown',
-                style({
-                    opacity: 0,
-                    fontSize: `{{fontSize}}rem`,
-                    transform: `translate({{dx}}vw, {{dy}}vh) rotate({{dr}}deg)`,
-                }),
-                {
-                    params: {
-                        dx: 0,
-                        dy: 0,
-                        dr: 0,
-                        fontSize: 5,
-                    },
-                }
-            ),
             transition('void => shown, * => shown', [
                 style({
-                    opacity: 0,
+                    opacity: 1,
                     fontSize: `{{fontSize}}rem`,
-                    transform: `translate({{x}}vw, {{y}}vh) rotate({{r}}deg)`,
+                    transform: `translate({{x}}vw) translateX(-{{o}}%) translateY({{y}}vh) rotate({{r}}deg)`,
                 }),
                 group([
                     animate(
-                        '{{fullSeconds}}s',
-                        style({ transform: `translate({{dx}}vw, {{dy}}vh) rotate({{dr}}deg)` })
+                        '{{duration}}s cubic-bezier(1,.85,1,.85)',
+                        style({
+                            transform: `translate({{dx}}vw) translateX(-{{o}}%) translateY({{dy}}vh) rotate({{dr}}deg)`,
+                        })
                     ),
                     animate(
-                        '{{fullSeconds}}s',
+                        '{{duration}}s linear',
                         keyframes([
-                            style({ opacity: 0 }),
-                            style({ opacity: 1 }),
-                            style({ opacity: 1 }),
-                            style({ opacity: 1 }),
-                            style({ opacity: 1 }),
-                            style({ opacity: 0 }),
+                            style({ opacity: 0, offset: 0 }),
+                            style({ opacity: 1, offset: .05 }),
+                            style({ opacity: 1, offset: .95 }),
+                            style({ opacity: 0, offset: 1 }),
                         ])
                     ),
                 ]),
@@ -68,7 +52,12 @@ interface Symbol {
 })
 export class SymbolStormNgComponent implements OnInit {
     symbols!: Symbol[];
-    private readonly maxSymbols = 20;
+    private readonly maxSymbols = 15;
+    private readonly columns = 2;
+
+    get activeSymbols(): Symbol[] {
+        return this.symbols.filter((s) => s.value === 'shown');
+    }
 
     @HostBinding('attr.aria-hidden') ariaHidden = true;
 
@@ -138,14 +127,14 @@ export class SymbolStormNgComponent implements OnInit {
             { text: 'void', class: 'plain' },
             { text: 'font-awesome', class: 'plain' },
             { text: 'javascript', class: 'plain' },
-            { class: 'fab fa-angular' },
-            { class: 'fab fa-node' },
-            { class: 'fab fa-node-js' },
-            { class: 'fab fa-github' },
-            { class: 'fab fa-js-square' },
-            { class: 'fab fa-aws' },
-            { class: 'fas fa-code' },
-            { class: 'fab fa-react' },
+            // { class: 'fab fa-angular' },
+            // { class: 'fab fa-node' },
+            // { class: 'fab fa-node-js' },
+            // { class: 'fab fa-github' },
+            // { class: 'fab fa-js-square' },
+            // { class: 'fab fa-aws' },
+            // { class: 'fas fa-code' },
+            // { class: 'fab fa-react' },
         ];
         this.symbols = this.symbols.map((s) => this.resetSymbol(s));
         setInterval(() => this.startStorm(), 500);
@@ -168,12 +157,14 @@ export class SymbolStormNgComponent implements OnInit {
     }
 
     resetSymbol(symbol: Symbol): Symbol {
-        let props: any;
+        const column = Math.round(Math.random() * (this.columns - 1));
+        const x = (Math.random() * 100) / this.columns;
         return {
             ...symbol,
             params: {
-                x: Math.random() * 100 - 10,
-                y: -20,
+                x: x + (column * 100) / this.columns,
+                o: x * this.columns,
+                y: Math.pow(Math.random() * 30, 1 / 1.05) - 20,
                 r: Math.random() * 40 - 20,
             },
             value: 'hidden',
@@ -181,14 +172,11 @@ export class SymbolStormNgComponent implements OnInit {
     }
 
     activateSymbol(symbol: Symbol): Symbol {
-        const dx = symbol.params.x + (Math.random() * 5 + 2) * (Math.random() < 0.5 ? -1 : 1);
-        const dy = 100;
+        const dx = symbol.params.x; // + (Math.random() * 5 + 2) * (Math.random() < 0.5 ? -1 : 1);
+        const dy = 105;
         const dr = Math.random() * 40 - 20;
-        const inSeconds = Math.random() * 0.25 + 0.25;
-        const delaySeconds = Math.random() * 1 + 9;
-        const outSeconds = Math.random() * 0.25 + 0.25;
-        const fullSeconds = inSeconds + delaySeconds + outSeconds;
-        const fontSize = Math.random() * 5 + 5;
+        const duration = Math.random() * 2 + (8 * (dy - symbol.params.y)) / dy;
+        const fontSize = Math.random() * 2 + 2;
         return {
             ...symbol,
             params: {
@@ -196,12 +184,7 @@ export class SymbolStormNgComponent implements OnInit {
                 dx,
                 dy,
                 dr,
-                inSeconds,
-                showOffset: inSeconds / fullSeconds,
-                fadeOffset: (inSeconds + delaySeconds) / fullSeconds,
-                delaySeconds,
-                outSeconds,
-                fullSeconds,
+                duration,
                 fontSize,
             },
             value: 'shown',

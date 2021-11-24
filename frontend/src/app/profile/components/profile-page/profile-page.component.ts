@@ -6,6 +6,10 @@ import { Component, OnInit } from '@angular/core';
     styleUrls: ['./profile-page.component.scss'],
 })
 export class ProfilePageComponent {
-
+    welcomeExpanded = false;
     constructor() {}
+    expandWelcome($event: MouseEvent): void {
+        this.welcomeExpanded = true;
+        $event.preventDefault();
+    }
 }

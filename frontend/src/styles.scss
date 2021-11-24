@@ -1,8 +1,22 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto+Mono:wght@100&display=swap');
-
+@import url('https://fonts.googleapis.com/css2?family=Alegreya+Sans+SC:wght@100&family=Josefin+Sans:wght@100&family=Open+Sans:wght@300;400&family=Roboto+Mono:wght@100&family=Source+Code+Pro&display=swap');
+html {
+    font-size: 16px;
+    scroll-behavior: smooth;
+}
+// @media screen and (min-width: 320px) {
+//     html {
+//         font-size: calc(16px + 6 * ((100vw - 320px) / 680));
+//     }
+// }
+// @media screen and (min-width: 1000px) {
+//     html {
+//         font-size: 22px;
+//     }
+// }
 body {
     padding: 0;
     margin: 0;
     background-color: #1e1e1e;
     color: #c3c3c3;
+    font-family: 'Open Sans', sans-serif;
 }

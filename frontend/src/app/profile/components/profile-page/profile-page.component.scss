@@ -1,7 +1,160 @@
+@import '/src/assets/font-awesome/fontawesome.scss';
+@import '/src/assets/font-awesome/solid.scss';
+@import '/src/assets/font-awesome/brands.scss';
+
 :host {
-    display: block;
-    box-sizing: border-box;
-    background-color: #1e1e1e;
-    // height: 100vh;
-    // padding: 2rem;
+    .container {
+        max-width: 1000px;
+        margin: 4rem auto;
+        padding: 0 2rem;
+    }
+
+    h2 {
+        margin: 3rem 0 0.5rem 0;
+    }
+
+    .bio {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        h1 {
+            font-family: 'Josefin Sans', sans-serif;
+            font-size: calc(min(6 * 16 * (100vw - 32px) / 370, 6 * 16px));
+            font-weight: 100;
+            margin: 0;
+        }
+        h2 {
+            font-family: 'Alegreya Sans SC', sans-serif;
+            font-size: min(32 * (100vw - 32px) / 600, 32px);
+            letter-spacing: min(6.4 * (100vw - 32px) / 600, 0.5rem);
+            margin: 1rem 0 1.5rem 0;
+        }
+        p {
+            margin: 0;
+            margin: 0 auto 1rem auto;
+            font-size: calc(min(16 * (100vw - 32px) / 370, 16px));
+            font-weight: 300;
+            font-style: italic;
+            width: min(14 * 16 * (100vw - 32px) / 370, 14 * 16px);
+            text-align: center;
+            @media (min-width: 525px) {
+                width: auto;
+            }
+        }
+    }
+
+    .welcome {
+        display: flex;
+        flex-direction: column;
+        max-width: 600px;
+        margin: 0 auto;
+        // perspective: 10cm;
+        p:first-child {
+            &:before,
+            &:after {
+                content: ' - ';
+            }
+            font-size: 1.5em;
+            font-weight: bold;
+            margin: 1rem 0;
+            text-align: center;
+        }
+        p:not(:first-child) {
+            margin: 0;
+            max-height: 0;
+            overflow: hidden;
+            transform-origin: 50% 0 0;
+            transform: perspective(75px) rotate3d(1, 0, 0, -90deg);
+            &.shown {
+                transform: rotate3d(0, 0, 0, 0);
+                margin: 0.5rem 0;
+                max-height: 100rem;
+                overflow: visible;
+                transition: max-height 3s ease-in, transform 0.4s linear 0.5s;
+                transform-style: preserve-3d;
+            }
+            text-align: justify;
+        }
+        a {
+            align-self: center;
+            color: #aaaaff;
+            text-decoration: none;
+        }
+    }
+
+    .skills {
+        max-width: 600px;
+        margin: 0 auto;
+        display: flex;
+        flex-flow: row wrap;
+        justify-content: flex-start;
+        @media (min-width: 500px) {
+            justify-content: space-around;
+        }
+        h2 {
+            width: 100%;
+            &:before,
+            &:after {
+                content: ' - ';
+            }
+            font-size: 1.5em;
+            font-weight: bold;
+            text-align: center;
+        }
+        & > div {
+            &:last-child {
+                width: calc(100% - 2rem);
+                @media (min-width: 500px) {
+                    width: auto;
+                }
+            }
+            margin-right: 1rem;
+            h3 {
+                margin: 1rem 0 1rem 0;
+            }
+            &:nth-of-type(3) {
+                li:nth-of-type(3),
+                li:nth-of-type(4) {
+                    img {
+                        background-color: white;
+                        height: 1.25rem;
+                    }
+                }
+            }
+
+            ul {
+                margin: 0;
+                padding: 0;
+                list-style: none;
+                li {
+                    img {
+                        line-height: 1.25rem;
+                        height: 1.25rem;
+                        width: 1.25rem;
+                        vertical-align: middle;
+                        border-radius: 3px;
+                        margin-right: 0.5rem;
+                    }
+                }
+            }
+        }
+    }
+
+    .work {
+        max-width: 600px;
+        margin: 0 auto;
+        h2 {
+            width: 100%;
+            &:before,
+            &:after {
+                content: ' - ';
+            }
+            font-size: 1.5em;
+            font-weight: bold;
+            text-align: center;
+        }
+        a {
+            color: #c3c3c3;
+        }
+    }
 }
