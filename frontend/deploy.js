@@ -11,7 +11,11 @@ fs.copyFileSync('./plain.js','./deploy/plain.js')
 fs.copyFileSync('./plain.css','./deploy/plain.css')
 
 console.log('Building Angular')
-const ngBuildResult = spawnSync("npx", ["ng", "build"], { cwd: "./angular" });
+const ngBuildResult = spawnSync("npx", ["ng", "build"], { cwd: "./angular", stdio: [process.stdin, process.stdout, process.stderr] });
 console.log('Moving Angular')
 fs.renameSync("./angular/dist/portfolio-frontend", "./deploy/angular");
+
+console.log('Deploying')
+spawnSync("git", ["checkout","-b","deploy"], { cwd: "..", stdio: [process.stdin, process.stdout, process.stderr] })
+
 console.log('Done')
