@@ -24,10 +24,10 @@ export class WelcomePageComponent implements OnInit {
 
     constructor(private router: Router) {}
 
-    // @HostListener('click')
-    // hostClick(): void {
-    //     // this.router.navigate(['profile']);
-    // }
+    @HostListener('click')
+    hostClick(): void {
+        this.router.navigate(['profile']);
+    }
 
     async ngOnInit(): Promise<void> {
         this.outputLines = this.lines.map((line) => ({

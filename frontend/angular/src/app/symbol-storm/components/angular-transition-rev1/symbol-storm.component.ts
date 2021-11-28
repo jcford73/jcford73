@@ -52,7 +52,7 @@ interface Symbol {
 })
 export class SymbolStormNgComponent implements OnInit {
     symbols!: Symbol[];
-    private readonly maxSymbols = 15;
+    private readonly maxSymbols = 35;
     private readonly columns = 2;
 
     get activeSymbols(): Symbol[] {
@@ -137,10 +137,10 @@ export class SymbolStormNgComponent implements OnInit {
             // { class: 'fab fa-react' },
         ];
         this.symbols = this.symbols.map((s) => this.resetSymbol(s));
-        setInterval(() => this.startStorm(), 500);
+        setInterval(() => this.updateStorm(), 500);
     }
 
-    async startStorm() {
+    async updateStorm() {
         if (this.symbols.filter((s) => s.value === 'shown').length < this.maxSymbols) {
             const idleSymbols = this.symbols.filter((s) => s.value !== 'shown');
             if (idleSymbols.length > 0) {
@@ -172,7 +172,7 @@ export class SymbolStormNgComponent implements OnInit {
     }
 
     activateSymbol(symbol: Symbol): Symbol {
-        const dx = symbol.params.x; // + (Math.random() * 5 + 2) * (Math.random() < 0.5 ? -1 : 1);
+        const dx = symbol.params.x + (Math.random() * 5 + 2) * (Math.random() < 0.5 ? -1 : 1);
         const dy = 105;
         const dr = Math.random() * 40 - 20;
         const duration = Math.random() * 2 + (8 * (dy - symbol.params.y)) / dy;
