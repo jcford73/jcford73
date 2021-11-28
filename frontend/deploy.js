@@ -17,5 +17,10 @@ fs.renameSync("./angular/dist/portfolio-frontend", "./deploy/angular");
 
 console.log('Deploying')
 spawnSync("git", ["checkout","-b","deploy"], { cwd: "..", stdio: [process.stdin, process.stdout, process.stderr] })
+spawnSync("git", ["add","frontend/deploy","--force"], { cwd: "..", stdio: [process.stdin, process.stdout, process.stderr] })
+spawnSync("git", ["commit","-m","deploy"], { cwd: "..", stdio: [process.stdin, process.stdout, process.stderr] })
+spawnSync("git", ["push","deploy","`git", "subtree", "split", "--prefix=frontend/deploy", "-b", "gh-pages`:gh-pages", "--force"], { cwd: "..", stdio: [process.stdin, process.stdout, process.stderr] })
+spawnSync("git", ["checkout","master"], { cwd: "..", stdio: [process.stdin, process.stdout, process.stderr] })
+spawnSync("git", ["branch","-D","deploy"], { cwd: "..", stdio: [process.stdin, process.stdout, process.stderr] })
 
 console.log('Done')
