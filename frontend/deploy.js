@@ -20,7 +20,7 @@ spawnSync("git", ["checkout","-b","deploy"], { cwd: "..", stdio: [process.stdin,
 spawnSync("git", ["add","frontend/deploy","--force"], { cwd: "..", stdio: [process.stdin, process.stdout, process.stderr] })
 spawnSync("git", ["commit","-m","deploy"], { cwd: "..", stdio: [process.stdin, process.stdout, process.stderr] })
 const subtree = spawnSync("git", ["subtree", "split", "--prefix=frontend/deploy"], { cwd: '..' })
-spawnSync("git", ["push", "deploy", "+" + subtree.stdout?.toString() + ":gh-pages", "--force"], { cwd: "..", stdio: [process.stdin, process.stdout, process.stderr] })
+spawnSync("git", ["push", "deploy", "+" + subtree.stdout?.toString() + ":refs/heads/branch", "--force"], { cwd: "..", stdio: [process.stdin, process.stdout, process.stderr] })
 spawnSync("git", ["checkout","master"], { cwd: "..", stdio: [process.stdin, process.stdout, process.stderr] })
 spawnSync("git", ["branch","-D","deploy"], { cwd: "..", stdio: [process.stdin, process.stdout, process.stderr] })
 
