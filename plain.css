@@ -1,0 +1,91 @@
+body {
+    margin: 0;
+    padding: 0;
+}
+#splash-container {
+    position: fixed;
+    height: 100vh;
+    width: 100vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.5rem;
+    cursor: pointer;
+    color: black;
+    -webkit-tap-highlight-color: transparent;
+}
+
+#splash-container.intro-done {
+    background-color: #dadada;
+    transition: background-color 1s;
+}
+
+#splash-container #modal-container {
+    background-color: white;
+    padding: 1rem;
+    border-radius: 1rem;
+    width: 200px;
+    height: 160px;
+}
+
+#splash-container.intro-done #modal-container {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2),
+                0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    transition: box-shadow 1s;
+}
+
+#splash-container #modal-container #welcome-box div span {
+    animation: fadeIn 1s ease-out 0s 1;
+}
+
+#splash-container #modal-container #come-in-button {
+    margin-top: 1rem;
+}
+
+#splash-container:not(.intro-done) #modal-container #come-in-button {
+    opacity: 0;
+}
+
+#splash-container.intro-done #modal-container #come-in-button {
+    animation: fadeIn 2s ease-out 0s 1;
+}
+
+#splash-container #modal-container #come-in-button a {
+    display: flex;
+    margin-left: auto;
+    margin-right: auto;
+    border: 1px solid black;
+    background-color: transparent;
+    padding: 1rem 2rem;
+    text-decoration: none;
+    color: black;
+    border-radius: 1rem;
+}
+
+#splash-container #modal-container #come-in-button a:focus {
+    outline: 1px solid black;
+}
+
+.tech-note {
+    position: relative;
+    top: -1rem;
+    font-size: .75rem;
+    opacity: 0;
+}
+
+#splash-container.intro-done .tech-note {
+    top: 1rem;
+    opacity: 0.75;
+    z-index: -1;
+    transition: top 1s ease-in 2s, opacity 2s ease-in 2s;
+}
+
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
